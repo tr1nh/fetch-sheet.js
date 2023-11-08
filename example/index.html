@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fetch Sheet Example</title>
+  </head>
+
+  <body>
+    <div id="app">
+      <h1>Users</h1>
+      <div id="users"></div>
+    </div>
+
+    <script src="../fetch-sheet.min.js"></script>
+
+    <script>
+      fetchSheet
+        .fetch({
+          gSheetId: "1TCQV2CDDyFb5fRS1hx_dJYl2qnQJhaKD3lo4xgI_7tc",
+          wSheetName: "users",
+        })
+        .then((rows) => {
+          document.querySelector("#users").innerHTML = rows
+            .map(row => `
+             <ul>
+              <li>id: ${row.id}</li>
+              <li>name: ${row.name}</li>
+              <li>username: ${row.username}</li>
+              <li>email: ${row.email}</li>
+              <li>phone: ${row.phone}</li>
+              <li>website: ${row.website}</li>
+             </ul>`)
+            .join("");
+        });
+    </script>
+  </body>
+</html>
